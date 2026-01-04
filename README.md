@@ -28,8 +28,8 @@ $ docker build -t cndrvsane:latest .
 
 ## Overview
 
-+ It needs to be run with --privileged to access USB
-+ It writes its output to /root/data so you should typically bind a local
++ It runs as non-root, but needs to be run with --privileged to access USB
++ It writes its output to /home/user/data so you should typically bind a local
   directory there
 + It just runs scanadf in the data directory
 
@@ -39,7 +39,7 @@ This serves as a useful test, and also allows you to select the correct device.
 Hopefully you will see something similar to below:
 
 ```
-$ docker run --rm -it --privileged -v `pwd`/data:/root/data cndrvsane:latest -L
+$ docker run --rm -it --privileged -v `pwd`/data:/home/user/data cndrvsane:latest -L
 device `canondr:libusb:003:012' is a Canon P208II sheetfed scanner
 ```
 
@@ -49,7 +49,7 @@ scanning enything)
 ## Scanning
 
 ```
-$ docker run --rm -it --privileged -v `pwd`/data:/root/data cndrvsane:latest -d canondr:libusb:003:012 --mode Color --resolution 600 --ScanMode Duplex -o "page-%04d.ppm"
+$ docker run --rm -it --privileged -v `pwd`/data:/home/user/data cndrvsane:latest -d canondr:libusb:003:012 --mode Color --resolution 600 --ScanMode Duplex -o "page-%04d.ppm"
 Scanned document page-0001.ppm
 Scanned document page-0002.ppm
 scanadf: sane_read: Document feeder out of documents

@@ -42,7 +42,12 @@ RUN apt-get -y --force-yes install libc6:i386 libstdc++6:i386
 RUN debuild --no-tgz-check -uc -us
 RUN dpkg -i ../cndrvsane-p208ii_1.00-3_amd64.deb
 
+# Create non-root user
+RUN groupadd -g 1000 user && useradd -u 1000 -g user -m user
+
+USER 1000:1000
+
 # Expect this to be bound with -v
-RUN mkdir /root/data
-WORKDIR /root/data
+RUN mkdir /home/user/data
+WORKDIR /home/user/data
 ENTRYPOINT ["scanadf"]
