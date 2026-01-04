@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Jon Siddle "jon@trapdoor.org"
+LABEL org.opencontainers.image.authors="Jon Siddle <jon@trapdoor.org>"
 
 # Jessie is dead
 RUN echo 'deb http://archive.debian.org/debian/ jessie main contrib non-free' > /etc/apt/sources.list
